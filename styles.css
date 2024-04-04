@@ -8,13 +8,13 @@ Author URI: http://www.mlpdesign.net/
 /* Global Settings */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 body {
-background: #000;
-background: -moz-linear-gradient(top, #7c803d 0%, #000000 75%, #000000 100%);
+background: #ffffff;
+/* background: -moz-linear-gradient(top, #7c803d 0%, #000000 75%, #000000 100%);
 background: -webkit-gradient(left top, left bottom, color-stop(0%, #7c803d), color-stop(75%, #000000), color-stop(100%, #000000));
 background: -webkit-linear-gradient(top, #7c803d 0%, #000000 75%, #000000 100%);
 background: -o-linear-gradient(top, #7c803d 0%, #000000 75%, #000000 100%);
 background: -ms-linear-gradient(top, #7c803d 0%, #000000 75%, #000000 100%);
-background: linear-gradient(to bottom, #7c803d 0%, #000000 75%, #000000 100%);
+background: linear-gradient(to bottom, #7c803d 0%, #000000 75%, #000000 100%); */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7c803d', endColorstr='#000000', GradientType=0 );
 	color: #111;
 	margin: 0;
@@ -76,14 +76,15 @@ blockquote {
 	padding: 10px;
 	height: 175px;
 	border: 0px;
-	color: #fff;
-	background: #abab83;
-	background: -moz-linear-gradient(top, #abab83 0%, #abab83 0%, #abab83 50%, #a1a172 51%, #a1a172 100%);
+	color: #404040;
+	/* background: #abab83; */
+	background: white;
+	/* background: -moz-linear-gradient(top, #abab83 0%, #abab83 0%, #abab83 50%, #a1a172 51%, #a1a172 100%);
 	background: -webkit-gradient(left top, left bottom, color-stop(0%, #abab83), color-stop(0%, #abab83), color-stop(50%, #abab83), color-stop(51%, #a1a172), color-stop(100%, #a1a172));
 	background: -webkit-linear-gradient(top, #abab83 0%, #abab83 0%, #abab83 50%, #a1a172 51%, #a1a172 100%);
 	background: -o-linear-gradient(top, #abab83 0%, #abab83 0%, #abab83 50%, #a1a172 51%, #a1a172 100%);
 	background: -ms-linear-gradient(top, #abab83 0%, #abab83 0%, #abab83 50%, #a1a172 51%, #a1a172 100%);
-	background: linear-gradient(to bottom, #abab83 0%, #abab83 0%, #abab83 50%, #a1a172 51%, #a1a172 100%);
+	background: linear-gradient(to bottom, #abab83 0%, #abab83 0%, #abab83 50%, #a1a172 51%, #a1a172 100%); */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#abab83', endColorstr='#a1a172', GradientType=0 );
 }
 
@@ -355,4 +356,14 @@ ul#topnav li a.active, ul#topnav li a.active:hover {    background: #eee;  color
 #footer span {display:none;}
 #footer p.show-footer {display: block; }
 #credits { font-size:80%; text-align:center;}
+}
+
+
+p.phead {
+
+	border-bottom-width: 2px;
+	border-block-color: #ff5400;
+	border-bottom-style: solid;
+	padding-bottom: 10px;
+
 }
