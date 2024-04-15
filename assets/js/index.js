@@ -6,7 +6,7 @@ window._wpemojiSettings = {
   svgExt: ".svg",
   source: {
     concatemoji:
-      "https://ciren.utk.edu/wp-includes/js/wp-emoji-release.min.js?ver=6.4.3",
+      "https://oh-scipe.github.io/wp-includes/js/wp-emoji-release.min.js?ver=6.4.3",
   },
 };
 /*! This file is auto-generated */
