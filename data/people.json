@@ -1,0 +1,43 @@
+[
+    {
+        "name": "Vipin Chaudhary",
+        "title": "Principal Investigator",
+        "image": "VipinChaudhary.jpg",
+        "orcid": "0000-0002-4432-5064",
+        "bio": "Vipin Chaudhary, Ph.D., is the Department Chair and Kevin J. Kranzusch Professor of Computer and Data Sciences at Case Western Reserve University.",
+        "expertise": "High Performance Computing and Applications to Science, Engineering, Biology, and Medicine; Artificial Intelligence/Machine Learning/Data Science; Computer Assisted Diagnosis and Interventions; Medical Image Processing; Computer Architecture; Quantum Computing.",
+        "email": "vipin@case.edu",
+        "linkedin": "https://www.linkedin.com/in/vipin-chaudhary-379529/",
+        "website": "https://case.edu/engineering/about/faculty-and-staff-directory/vipin-chaudhary"
+    },
+    {
+        "name": "Jane Combs",
+        "title": "Principal Investigator",
+        "image": "jane.jpeg",
+        "orcid": "0000-0002-4432-5064",
+        "bio": "Jane Combs, Ph.D., is the Director of UC Advanced Research Computing, specializing in IT leadership for higher education with expertise in research computing, infrastructure, and national funding proposals. She excels in strategic partnerships and resource development.",
+        "expertise": "Skilled in securing funding, managing cyberinfrastructure, and leading IT projects. Expert in strategic planning, analytics, and fostering national research partnerships. Effective communicator.",
+        "email": "combsje@uc.edu",
+        "linkedin": "https://www.linkedin.com/in/jane-combs-80886110/"
+    },
+    {
+        "name": "Karen Tomko",
+        "title": "Principal Investigator",
+        "image": "karen.png",
+        "orcid": "0000-0002-6542-853X",
+        "bio": "Karen Tomko, Ph.D., is the Director of Research Software Applications and leads the Scientific Applications group at the Ohio Supercomputer Center. Tomko also serves on the steering committee for the Midwest Research Computing and Data Consortium and is a member of the leadership team for the ICICLE AI institute.",
+        "expertise": "High performance computing, research software engineering, application performance tuning, cyberinfrastructure for AI, workforce development for cyberinfrastructure professionals.",
+        "email": "ktomko@osc.edu",
+        "linkedin": "https://www.linkedin.com/in/karen-tomko-53a6613/"
+    },
+    {
+        "name": "Sanjaya Gajurel, Ph.D.",
+        "title": "Senior Personnel",
+        "image": "Sanjaya-HeadShot.jpg",
+        "orcid": "0000-0002-6162-8737",
+        "bio": "Sanjaya Gajurel, Ph.D., is a Senior Computational Scientist and Adjunct Assistant Professor of Computer and Data Sciences at Case Western Reserve University.",
+        "expertise": "High Performance Computing and Applications, Computer Architecture, Data Science, AI/ML, Optimization",
+        "email": "sgajurel@case.edu",
+        "linkedin": "https://www.linkedin.com/in/sanjayagajurel/"
+    }
+]
