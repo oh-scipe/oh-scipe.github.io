@@ -1,3 +1,5 @@
+build:
+	python3 build.py
 
 serve:
-	python -m http.server 8008
+	python3 -m http.server 8008
