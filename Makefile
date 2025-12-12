@@ -1,4 +1,8 @@
+install:
+	npm install
+
 build:
+	node scripts/copyOptimizeImages.js
 	python3 build.py
 
 serve:
