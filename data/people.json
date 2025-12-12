@@ -11,16 +11,6 @@
         "website": "https://case.edu/engineering/about/faculty-and-staff-directory/vipin-chaudhary"
     },
     {
-        "name": "Jane Combs",
-        "title": "Principal Investigator",
-        "image": "jane.jpeg",
-        "orcid": "0000-0002-4432-5064",
-        "bio": "Jane Combs, Ph.D., is the Director of UC Advanced Research Computing, specializing in IT leadership for higher education with expertise in research computing, infrastructure, and national funding proposals. She excels in strategic partnerships and resource development.",
-        "expertise": "Skilled in securing funding, managing cyberinfrastructure, and leading IT projects. Expert in strategic planning, analytics, and fostering national research partnerships. Effective communicator.",
-        "email": "combsje@uc.edu",
-        "linkedin": "https://www.linkedin.com/in/jane-combs-80886110/"
-    },
-    {
         "name": "Karen Tomko",
         "title": "Principal Investigator",
         "image": "karen.png",
@@ -31,7 +21,17 @@
         "linkedin": "https://www.linkedin.com/in/karen-tomko-53a6613/"
     },
     {
-        "name": "Sanjaya Gajurel, Ph.D.",
+        "name": "Jane Combs",
+        "title": "Principal Investigator",
+        "image": "jane.jpeg",
+        "orcid": "0000-0002-4432-5064",
+        "bio": "Jane Combs, Ph.D., is the Director of UC Advanced Research Computing, specializing in IT leadership for higher education with expertise in research computing, infrastructure, and national funding proposals. She excels in strategic partnerships and resource development.",
+        "expertise": "Skilled in securing funding, managing cyberinfrastructure, and leading IT projects. Expert in strategic planning, analytics, and fostering national research partnerships. Effective communicator.",
+        "email": "combsje@uc.edu",
+        "linkedin": "https://www.linkedin.com/in/jane-combs-80886110/"
+    },
+    {
+        "name": "Sanjaya Gajurel",
         "title": "Senior Personnel",
         "image": "Sanjaya-HeadShot.jpg",
         "orcid": "0000-0002-6162-8737",
@@ -39,5 +39,37 @@
         "expertise": "High Performance Computing and Applications, Computer Architecture, Data Science, AI/ML, Optimization",
         "email": "sgajurel@case.edu",
         "linkedin": "https://www.linkedin.com/in/sanjayagajurel/"
+    },
+        {
+        "name": "Hadrian Djohari",
+        "title": "Senior Personnel",
+        "image": "hadrian.jpeg",
+        "orcid": "0009-0004-8261-2939",
+        "bio": "Hadrian Djohari, Ph.D., is the Director of High Performance Computing at Case Western Reserve University, and an XSEDE Campus Champion for Case Western Reserve University. His research focuses on computational fluid dynamics, molecular/particle dynamics, and computer infrastructure.",
+        "expertise": "High Performance Computing and Applications; Molecular and Particle Dynamics computation.",
+        "email": "hdjohari@case.edu",
+        "linkedin": "https://www.linkedin.com/in/hadrian-djohari-a281b91/"
+    },
+    {
+        "name": "Evan Jaffe",
+        "title": "Machine Learning Engineer",
+        "image": "EvanJaffe.png",
+        "orcid": "0009-0005-7218-2020",
+        "bio": "Evan Jaffe, Ph.D., is a Machine Learning Engineer at the Ohio Supercomputer Center with research experience in computational linguistics.",
+        "expertise": "High performance computing, machine learning with an emphasis on language modeling and related tasks.",
+        "email": "ejaffe@osc.edu",
+        "linkedin": "https://www.linkedin.com/in/evan-jaffe-phd/"
+    },
+    {
+        "name": "Mohsen Hariri",
+        "title": "AI Scientist",
+        "image": "mohsen.jpg",
+        "orcid": "0000-0003-0731-4275",
+        "bio": "Mohsen Hariri, M.S., is an AI Scientist at Case Western Reserve University with research experience in large language models and efficient AI inference.",
+        "expertise": "Large Language Models, Compression and Quantization, Efficient AI Inference",
+        "email": "mohsen.hariri@case.edu",
+        "linkedin": "https://www.linkedin.com/in/mohsenhr/",
+        "website": "https://mohsenhariri.github.io/"
     }
 ]
+
