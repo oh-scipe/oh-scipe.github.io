@@ -1,7 +1,7 @@
 import os
 import json
 
-def generate_initiative_pages(initiatives_data, layout, output_dir):
+def generate_initiative_pages(initiatives_data, layout, output_dir, sidebar_initiatives_html):
     initiatives_dir = os.path.join(output_dir, 'initiatives')
     if not os.path.exists(initiatives_dir):
         os.makedirs(initiatives_dir)
@@ -28,6 +28,7 @@ def generate_initiative_pages(initiatives_data, layout, output_dir):
         
         # Apply layout
         page_html = layout.replace('<!-- CONTENT -->', page_content)
+        page_html = page_html.replace('<!-- SIDEBAR_INITIATIVES -->', sidebar_initiatives_html)
         page_html = page_html.replace('{{ relative_root }}', relative_root)
         
         # Set active class (initiatives)
@@ -56,6 +57,25 @@ def build_site():
     # Read layout
     with open(layout_file, 'r') as f:
         layout = f.read()
+
+    # Load initiatives data for sidebar
+    sidebar_initiatives_html = ""
+    initiatives_data = []
+    if os.path.exists('data/initiatives.json'):
+        with open('data/initiatives.json', 'r') as f:
+            initiatives_data = json.load(f)
+        
+        for i, initiative in enumerate(initiatives_data):
+            # Highlight the first item
+            style = 'style="font-weight: bold; color: #ff7700;"' if i == 0 else ''
+            
+            sidebar_initiatives_html += f'''
+            <li>
+                <a class="wp-block-latest-posts__post-title" href="{{{{ relative_root }}}}/initiatives/{initiative['slug']}.html" {style}>
+                    {initiative['title']}
+                </a>
+            </li>
+            '''
     
     # Process each page
     for content_file, config in pages.items():
@@ -104,10 +124,8 @@ def build_site():
             content = people_page_template.replace('<!-- PEOPLE_LIST -->', people_html)
 
         # Special handling for initiatives page
-        elif content_file == 'initiatives.html' and os.path.exists('data/initiatives.json'):
-            print("Generating initiatives page from data/initiatives.json...")
-            with open('data/initiatives.json', 'r') as f:
-                initiatives_data = json.load(f)
+        elif content_file == 'initiatives.html':
+            # We already loaded initiatives_data above
             
             with open('templates/initiative_list_item.html', 'r') as f:
                 initiative_item_template = f.read()
@@ -126,7 +144,7 @@ def build_site():
             content = initiatives_list_template.replace('<!-- INITIATIVES_LIST -->', initiatives_html)
             
             # Also generate individual initiative pages
-            generate_initiative_pages(initiatives_data, layout, output_dir)
+            generate_initiative_pages(initiatives_data, layout, output_dir, sidebar_initiatives_html)
 
         else:
             content_path = os.path.join(content_dir, content_file)
@@ -139,6 +157,7 @@ def build_site():
         
         # Replace placeholders
         page_html = layout.replace('<!-- CONTENT -->', content)
+        page_html = page_html.replace('<!-- SIDEBAR_INITIATIVES -->', sidebar_initiatives_html)
         page_html = page_html.replace('{{ relative_root }}', relative_root)
         
         # Reset all classes
