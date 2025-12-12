@@ -1,0 +1,20 @@
+[
+  {
+    "title": "SCIPE Workshop on Large Language Models",
+    "slug": "llm-working-2026",
+    "description": "Upcoming event on LLM Working in 2026.",
+    "content_file": "content/initiatives/llm-working-2026.html"
+  },
+  {
+    "title": "Summer 2025 Internship",
+    "slug": "summer-2025-internship",
+    "description": "Upcoming summer internship program for 2025.",
+    "content_file": "content/initiatives/summer-2025-internship.html"
+  },
+  {
+    "title": "OH-SCIPE Summer 2024 Internship Program",
+    "slug": "summer-2024-internship",
+    "description": "Annual summer internship program for 2024.",
+    "content_file": "content/initiatives/summer-2024-internship.html"
+  }
+]
