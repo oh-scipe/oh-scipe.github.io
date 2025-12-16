@@ -8,6 +8,8 @@ def generate_initiative_pages(initiatives_data, layout, output_dir, sidebar_init
         
     with open('templates/initiative_page.html', 'r') as f:
         page_template = f.read()
+    
+    base_url = 'https://oh-scipe.github.io'
         
     for initiative in initiatives_data:
         slug = initiative['slug']
@@ -31,6 +33,17 @@ def generate_initiative_pages(initiatives_data, layout, output_dir, sidebar_init
         page_html = page_html.replace('<!-- SIDEBAR_INITIATIVES -->', sidebar_initiatives_html)
         page_html = page_html.replace('{{ relative_root }}', relative_root)
         
+        # SEO metadata for initiative pages
+        page_title = f"{initiative['title']} - OH-SCIPE Initiative"
+        page_description = initiative.get('description', f"Learn about {initiative['title']}, an OH-SCIPE initiative in AI and machine learning research.")
+        page_keywords = f"AI research, machine learning, {initiative['title']}, research opportunities, NSF initiative, computational science"
+        canonical_url = f"{base_url}/initiatives/{slug}.html"
+        
+        page_html = page_html.replace('{{ page_title }}', page_title)
+        page_html = page_html.replace('{{ page_description }}', page_description)
+        page_html = page_html.replace('{{ page_keywords }}', page_keywords)
+        page_html = page_html.replace('{{ canonical_url }}', canonical_url)
+        
         # Set active class (initiatives)
         for cls in ['class_home', 'class_about', 'class_projects', 'class_people', 'class_initiatives']:
             page_html = page_html.replace(f'{{{{ {cls} }}}}', 'current-menu-item' if cls == 'class_initiatives' else '')
@@ -44,6 +57,41 @@ def build_site():
     layout_file = 'templates/layout.html'
     content_dir = 'content'
     output_dir = '.'
+    base_url = 'https://oh-scipe.github.io'
+    
+    # SEO metadata for each page
+    page_metadata = {
+        'index.html': {
+            'title': 'OH-SCIPE - Revolutionizing Research with AI and ML Integration',
+            'description': 'NSF-funded initiative empowering science and engineering through advanced artificial intelligence and machine learning. Collaborative research across Case Western Reserve University, Ohio Supercomputer Center, and University of Cincinnati.',
+            'keywords': 'AI research, machine learning, NSF funded, computational infrastructure, HPC, artificial intelligence, science engineering, Ohio research, AI integration, ML engineering',
+            'url': base_url + '/'
+        },
+        'about.html': {
+            'title': 'About OH-SCIPE - Team & Mission | AI Research Initiative',
+            'description': 'Meet the interdisciplinary OH-SCIPE team of AI/ML experts from leading Ohio institutions. Learn about our mission to integrate machine learning engineering into science and engineering research.',
+            'keywords': 'AI research team, machine learning experts, NSF research, computational scientists, HPC experts, research collaboration, Ohio universities',
+            'url': base_url + '/about.htm'
+        },
+        'projects.htm': {
+            'title': 'OH-SCIPE Projects - AI & ML Research Applications',
+            'description': 'Explore OH-SCIPE research projects integrating artificial intelligence and machine learning into science and engineering. Discover cutting-edge computational research applications.',
+            'keywords': 'AI projects, ML research, computational science projects, research applications, HPC applications, AI engineering',
+            'url': base_url + '/projects.htm'
+        },
+        'people.html': {
+            'title': 'OH-SCIPE Team - Researchers & Principal Investigators',
+            'description': 'Meet the principal investigators, machine learning engineers, and AI scientists driving OH-SCIPE research. Expert team from Case Western, OSC, and University of Cincinnati.',
+            'keywords': 'AI researchers, ML engineers, principal investigators, computational scientists, research team, AI experts, Ohio researchers',
+            'url': base_url + '/people.htm'
+        },
+        'initiatives.html': {
+            'title': 'OH-SCIPE Initiatives - Internships & Research Opportunities',
+            'description': 'Discover OH-SCIPE research initiatives including summer internships, AI research opportunities for undergraduates, and collaborative programs in machine learning and computational science.',
+            'keywords': 'research internships, AI opportunities, undergraduate research, summer programs, ML internships, research experience, NSF opportunities',
+            'url': base_url + '/Initiatives.htm'
+        }
+    }
     
     # Map content files to output files and active menu classes
     pages = {
@@ -159,6 +207,13 @@ def build_site():
         page_html = layout.replace('<!-- CONTENT -->', content)
         page_html = page_html.replace('<!-- SIDEBAR_INITIATIVES -->', sidebar_initiatives_html)
         page_html = page_html.replace('{{ relative_root }}', relative_root)
+        
+        # Replace SEO metadata
+        metadata = page_metadata.get(content_file, page_metadata['index.html'])
+        page_html = page_html.replace('{{ page_title }}', metadata['title'])
+        page_html = page_html.replace('{{ page_description }}', metadata['description'])
+        page_html = page_html.replace('{{ page_keywords }}', metadata['keywords'])
+        page_html = page_html.replace('{{ canonical_url }}', metadata['url'])
         
         # Reset all classes
         for cls in ['class_home', 'class_about', 'class_projects', 'class_people', 'class_initiatives']:

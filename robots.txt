@@ -1,0 +1,20 @@
+# robots.txt for OH-SCIPE
+# https://oh-scipe.github.io
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://oh-scipe.github.io/sitemap.xml
+
+# Disallow crawling of non-essential directories
+Disallow: /assets/js/
+Disallow: /scripts/
+Disallow: /templates/
+Disallow: /content/
+Disallow: /data/
+Disallow: /src/
+
+# Allow crawling of CSS for rendering
+Allow: /assets/css/
+Allow: /assets/images/

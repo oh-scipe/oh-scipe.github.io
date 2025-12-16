@@ -2447,13 +2447,6 @@ p.system {
   font-size: 0.75rem;
 }
 p.accessibility a,
-p.system a {
-  text-decoration: underline;
-}
-p.system {
-  background: url(../images/interface/winged-ut.png) no-repeat;
-  padding-left: 30px;
-}
 #meta-contact p,
 #meta-info p {
   font-size: 0.85rem;

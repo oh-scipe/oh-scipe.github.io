@@ -3,8 +3,78 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>OH-SCIPE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ page_description }}" />
+    <meta name="keywords" content="{{ page_keywords }}" />
+    <meta name="author" content="OH-SCIPE - NSF-funded AI and ML Research Initiative" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ canonical_url }}" />
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ page_description }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ canonical_url }}" />
+    <meta property="og:image" content="https://oh-scipe.github.io/assets/images/project1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="OH-SCIPE" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ page_title }}" />
+    <meta name="twitter:description" content="{{ page_description }}" />
+    <meta name="twitter:image" content="https://oh-scipe.github.io/assets/images/project1.png" />
+    <meta name="twitter:image:alt" content="OH-SCIPE - AI and ML Research Initiative" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ResearchOrganization",
+      "name": "OH-SCIPE",
+      "alternateName": "Ohio Science and Engineering through Advanced AI",
+      "description": "NSF-funded initiative revolutionizing research with AI and ML integration, empowering science and engineering through advanced artificial intelligence",
+      "url": "https://oh-scipe.github.io",
+      "logo": "https://oh-scipe.github.io/assets/images/project1.png",
+      "sameAs": [
+        "https://www.nsf.gov"
+      ],
+      "funder": {
+        "@type": "Organization",
+        "name": "National Science Foundation",
+        "url": "https://www.nsf.gov"
+      },
+      "member": [
+        {
+          "@type": "Organization",
+          "name": "Case Western Reserve University",
+          "url": "https://case.edu/"
+        },
+        {
+          "@type": "Organization",
+          "name": "Ohio Supercomputer Center",
+          "url": "https://www.osc.edu/"
+        },
+        {
+          "@type": "Organization",
+          "name": "University of Cincinnati",
+          "url": "https://www.uc.edu/"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Research Inquiries",
+        "email": "vipin@case.edu"
+      }
+    }
+    </script>
 
     <!--[if lt IE 10]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script></script><![endif]-->
 
@@ -12,6 +82,7 @@
       rel="shortcut icon"
       href="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png"
     />
+    <link rel="icon" type="image/png" sizes="300x300" href="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png" />
 
     <link rel="dns-prefetch" href="https://code.jquery.com/" />
 
@@ -62,34 +133,9 @@
       media="all"
     />
 
-    <link rel="https://api.w.org/" href="https://oh-scipe.github.io/wp-json/" />
-    <link
-      rel="alternate"
-      type="application/json"
-      href="https://oh-scipe.github.io/wp-json/wp/v2/pages/4363"
-    />
-    <link
-      rel="EditURI"
-      type="application/rsd+xml"
-      title="RSD"
-      href="https://oh-scipe.github.io/xmlrpc.php?rsd"
-    />
-    <meta name="generator" content="WordPress 6.4.3" />
-    <link rel="shortlink" href="https://oh-scipe.github.io/" />
-    <link
-      rel="alternate"
-      type="application/json+oembed"
-      href="https://oh-scipe.github.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fciren.oh-scipe.github.io%2F"
-    />
-    <link
-      rel="alternate"
-      type="text/xml+oembed"
-      href="https://oh-scipe.github.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fciren.oh-scipe.github.io%2F&amp;format=xml"
-    />
-    <script
-      src="{{ relative_root }}/assets/js/wp-emoji-release.min.js"
-      defer="defer"
-    ></script>
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://code.jquery.com" crossorigin />
+    
   </head>
 
   <body class="home page-template-default page page-id-4363 webapp">
@@ -228,7 +274,7 @@
                       loading="lazy"
                       decoding="async"
                       src="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png"
-                      alt=""
+                      alt="National Science Foundation Official Logo"
                       class="wp-image-4578"
                       width="287"
                       height="124"
@@ -320,7 +366,7 @@
                 loading="lazy"
                 decoding="async"
                 src="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png"
-                alt=""
+                alt="National Science Foundation Official Logo"
                 class="wp-image-4390"
                 width="120"
                 height="120"
@@ -331,7 +377,7 @@
                 loading="lazy"
                 decoding="async"
                 src="{{ relative_root }}/assets/images/logo/osu_logo.png"
-                alt=""
+                alt="Ohio Supercomputer Center Logo"
                 class="wp-image-4390"
                 width="120"
                 height="120"
@@ -342,7 +388,7 @@
                 loading="lazy"
                 decoding="async"
                 src="{{ relative_root }}/assets/images/logo/cwru_logo.png"
-                alt=""
+                alt="Case Western Reserve University Logo"
                 class="wp-image-4390"
                 width="120"
                 height="120"
@@ -353,7 +399,7 @@
                 loading="lazy"
                 decoding="async"
                 src="{{ relative_root }}/assets/images/logo/uoc_logo.png"
-                alt=""
+                alt="University of Cincinnati Logo"
                 class="wp-image-4390"
                 width="120"
                 height="120"
@@ -413,15 +459,6 @@
         </div>
       </div>
     </footer>
-
-    <div id="system-indicia">
-      <div class="container">
-        <div class="col">
-          <p class="system">
-          </p>
-        </div>
-      </div>
-    </div>
 
     <style id="core-block-supports-inline-css" type="text/css">
       .wp-container-core-columns-layout-1.wp-container-core-columns-layout-1 {
