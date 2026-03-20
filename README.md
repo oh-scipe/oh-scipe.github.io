@@ -57,5 +57,3 @@ Run `make clean` to remove `dist/`.
 ## GitHub Pages Setup
 In the repository settings, switch **Pages** to **GitHub Actions** as the build and deployment source. The workflow at `.github/workflows/deploy.yml` will publish the contents of `dist/`.
 
-## Notes
-Legacy generated HTML and image output from the old deployment model are not part of source control anymore. The automated deployment path uses `dist/` instead of committing generated output.

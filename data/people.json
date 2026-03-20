@@ -70,6 +70,14 @@
         "email": "mohsen.hariri@case.edu",
         "linkedin": "https://www.linkedin.com/in/mohsenhr/",
         "website": "https://mohsenhariri.github.io/"
+    },
+    {
+        "name": "Weicong Chen",
+        "title": "AI Scientist",
+        "image": "weicong.png",
+        "orcid": "0000-0003-0573-8808",
+        "bio": "Weicong Chen, Ph.D., is an AI Scientist at Case Western Reserve University with research experience in Artificial Intelligence and High Performance Computing.",
+        "expertise": "Artificial Intelligence, High Performance Computing",
+        "email": "ben072292@gmail.com"
     }
 ]
-
