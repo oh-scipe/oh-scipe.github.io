@@ -1,0 +1,74 @@
+site:
+  name: OH-SCIPE
+  home_link_title: OH-SCIPE Home
+  tagline: Empowering Science and Engineering through Advanced AI
+  footer_tagline: Revolutionizing Research with AI and ML Integration. Empowering Science and Engineering through Advanced AI.
+  base_url: https://oh-scipe.github.io
+  locale: en_US
+  author: OH-SCIPE
+  robots: index, follow
+  open_graph:
+    type: website
+    image: https://oh-scipe.github.io/assets/images/project1.png
+    image_width: "1200"
+    image_height: "630"
+  twitter:
+    card: summary_large_image
+    image: https://oh-scipe.github.io/assets/images/project1.png
+    image_alt: OH-SCIPE research collaboration graphic
+  structured_data:
+    "@context": https://schema.org
+    "@type": ResearchOrganization
+    name: OH-SCIPE
+    alternateName: Ohio Science and Engineering through Advanced AI
+    description: OH-SCIPE is an NSF-supported collaboration that integrates AI and machine learning expertise into science and engineering research across partner institutions in Ohio.
+    url: https://oh-scipe.github.io
+    logo: https://oh-scipe.github.io/assets/images/project1.png
+    sameAs:
+      - https://www.nsf.gov
+    funder:
+      "@type": Organization
+      name: National Science Foundation
+      url: https://www.nsf.gov
+    member:
+      - "@type": Organization
+        name: Case Western Reserve University
+        url: https://case.edu/
+      - "@type": Organization
+        name: Ohio Supercomputer Center
+        url: https://www.osc.edu/
+      - "@type": Organization
+        name: University of Cincinnati
+        url: https://www.uc.edu/
+    contactPoint:
+      "@type": ContactPoint
+      contactType: Research inquiries
+      email: vipin@case.edu
+
+pages:
+  index.html:
+    title: OH-SCIPE | AI and ML for Science and Engineering Research
+    description: OH-SCIPE is an NSF-supported collaboration that helps science and engineering teams integrate AI and machine learning expertise into research workflows.
+    keywords: OH-SCIPE, AI, machine learning, science and engineering, research computing, cyberinfrastructure, NSF
+  about.html:
+    title: About OH-SCIPE | Collaboration and Mission
+    description: Learn about OH-SCIPE, a cross-institution collaboration focused on AI, machine learning, research computing, and science and engineering partnerships in Ohio.
+    keywords: OH-SCIPE, about, collaboration, AI, machine learning, research computing, Ohio
+  projects.htm:
+    title: Projects | OH-SCIPE
+    description: Explore OH-SCIPE project iterations, research experiences, and program activities focused on applying AI and machine learning to science and engineering.
+    keywords: OH-SCIPE, projects, AI, machine learning, undergraduate research, science and engineering
+  people.html:
+    title: People | OH-SCIPE
+    description: Meet the OH-SCIPE principal investigators, researchers, and staff from Case Western Reserve University, Ohio Supercomputer Center, and the University of Cincinnati.
+    keywords: OH-SCIPE, people, team, principal investigators, research staff, AI, machine learning
+  initiatives.html:
+    title: Initiatives | OH-SCIPE
+    description: Browse OH-SCIPE initiatives, workshops, internships, and other opportunities across the collaboration.
+    keywords: OH-SCIPE, initiatives, workshops, internships, research opportunities, AI, machine learning
+
+initiative_page:
+  title_template: "{title} | OH-SCIPE Initiative"
+  description_template: "{description}"
+  fallback_description: Learn about {title}, an OH-SCIPE initiative in AI, machine learning, and science and engineering research support.
+  keywords_template: OH-SCIPE, initiatives, AI, machine learning, research opportunities, {title}

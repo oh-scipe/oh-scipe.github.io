@@ -1,13 +1,12 @@
 install:
-	npm install
+	npm ci
+	python3 -m pip install -r requirements.txt
 
 build:
-	node scripts/copyOptimizeImages.js
-	python3 build.py
+	npm run build
 
 serve:
-	python3 -m http.server 8008
+	npm run preview
 
 clean:
-	rm -f *.htm
-	rm -rf initiatives
+	npm run clean

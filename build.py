@@ -1,160 +1,174 @@
-import os
+import argparse
 import json
+import re
+from pathlib import Path
 
-def generate_initiative_pages(initiatives_data, layout, output_dir, sidebar_initiatives_html):
-    initiatives_dir = os.path.join(output_dir, 'initiatives')
-    if not os.path.exists(initiatives_dir):
-        os.makedirs(initiatives_dir)
-        
-    with open('templates/initiative_page.html', 'r') as f:
-        page_template = f.read()
-    
-    base_url = 'https://oh-scipe.github.io'
-        
-    for initiative in initiatives_data:
-        slug = initiative['slug']
-        output_path = os.path.join(initiatives_dir, f'{slug}.html')
-        relative_root = '..'
-        
-        # Read content file
-        content_file = initiative.get('content_file')
-        if content_file and os.path.exists(content_file):
-            with open(content_file, 'r') as f:
-                initiative_content = f.read()
-        else:
-            initiative_content = initiative.get('content', '')
-            
-        # Prepare page content
-        page_content = page_template.replace('{title}', initiative['title'])
-        page_content = page_content.replace('{content}', initiative_content)
-        
-        # Apply layout
-        page_html = layout.replace('<!-- CONTENT -->', page_content)
-        page_html = page_html.replace('<!-- SIDEBAR_INITIATIVES -->', sidebar_initiatives_html)
-        page_html = page_html.replace('{{ relative_root }}', relative_root)
-        
-        # SEO metadata for initiative pages
-        page_title = f"{initiative['title']} - OH-SCIPE Initiative"
-        page_description = initiative.get('description', f"Learn about {initiative['title']}, an OH-SCIPE initiative in AI and machine learning research.")
-        page_keywords = f"AI research, machine learning, {initiative['title']}, research opportunities, NSF initiative, computational science"
-        canonical_url = f"{base_url}/initiatives/{slug}.html"
-        
-        page_html = page_html.replace('{{ page_title }}', page_title)
-        page_html = page_html.replace('{{ page_description }}', page_description)
-        page_html = page_html.replace('{{ page_keywords }}', page_keywords)
-        page_html = page_html.replace('{{ canonical_url }}', canonical_url)
-        
-        # Set active class (initiatives)
-        for cls in ['class_home', 'class_about', 'class_projects', 'class_people', 'class_initiatives']:
-            page_html = page_html.replace(f'{{{{ {cls} }}}}', 'current-menu-item' if cls == 'class_initiatives' else '')
-            
-        with open(output_path, 'w') as f:
-            f.write(page_html)
-        print(f"Generated {output_path}")
+import yaml
 
-def build_site():
-    # Configuration
-    layout_file = 'templates/layout.html'
-    content_dir = 'content'
-    output_dir = '.'
-    base_url = 'https://oh-scipe.github.io'
-    
-    # SEO metadata for each page
-    page_metadata = {
-        'index.html': {
-            'title': 'OH-SCIPE - Revolutionizing Research with AI and ML Integration',
-            'description': 'NSF-funded initiative empowering science and engineering through advanced artificial intelligence and machine learning. Collaborative research across Case Western Reserve University, Ohio Supercomputer Center, and University of Cincinnati.',
-            'keywords': 'AI research, machine learning, NSF funded, computational infrastructure, HPC, artificial intelligence, science engineering, Ohio research, AI integration, ML engineering',
-            'url': base_url + '/'
-        },
-        'about.html': {
-            'title': 'About OH-SCIPE - Team & Mission | AI Research Initiative',
-            'description': 'Meet the interdisciplinary OH-SCIPE team of AI/ML experts from leading Ohio institutions. Learn about our mission to integrate machine learning engineering into science and engineering research.',
-            'keywords': 'AI research team, machine learning experts, NSF research, computational scientists, HPC experts, research collaboration, Ohio universities',
-            'url': base_url + '/about.htm'
-        },
-        'projects.htm': {
-            'title': 'OH-SCIPE Projects - AI & ML Research Applications',
-            'description': 'Explore OH-SCIPE research projects integrating artificial intelligence and machine learning into science and engineering. Discover cutting-edge computational research applications.',
-            'keywords': 'AI projects, ML research, computational science projects, research applications, HPC applications, AI engineering',
-            'url': base_url + '/projects.htm'
-        },
-        'people.html': {
-            'title': 'OH-SCIPE Team - Researchers & Principal Investigators',
-            'description': 'Meet the principal investigators, machine learning engineers, and AI scientists driving OH-SCIPE research. Expert team from Case Western, OSC, and University of Cincinnati.',
-            'keywords': 'AI researchers, ML engineers, principal investigators, computational scientists, research team, AI experts, Ohio researchers',
-            'url': base_url + '/people.htm'
-        },
-        'initiatives.html': {
-            'title': 'OH-SCIPE Initiatives - Internships & Research Opportunities',
-            'description': 'Discover OH-SCIPE research initiatives including summer internships, AI research opportunities for undergraduates, and collaborative programs in machine learning and computational science.',
-            'keywords': 'research internships, AI opportunities, undergraduate research, summer programs, ML internships, research experience, NSF opportunities',
-            'url': base_url + '/Initiatives.htm'
-        }
-    }
-    
-    # Map content files to output files and active menu classes
-    pages = {
-        'index.html': {'output': 'index.htm', 'class': 'class_home'},
-        'about.html': {'output': 'about.htm', 'class': 'class_about'},
-        'projects.htm': {'output': 'projects.htm', 'class': 'class_projects'},
-        'people.html': {'output': 'people.htm', 'class': 'class_people'},
-        'initiatives.html': {'output': 'Initiatives.htm', 'class': 'class_initiatives'},
-    }
-    
-    # Read layout
-    with open(layout_file, 'r') as f:
-        layout = f.read()
+ROOT = Path(__file__).resolve().parent
+PLACEHOLDER_PATTERN = re.compile(r"{{\s*([a-zA-Z0-9_]+)\s*}}")
+NAV_CLASSES = [
+    "class_home",
+    "class_about",
+    "class_projects",
+    "class_people",
+    "class_initiatives",
+]
 
-    # Load initiatives data for sidebar
-    sidebar_initiatives_html = ""
-    initiatives_data = []
-    if os.path.exists('data/initiatives.json'):
-        with open('data/initiatives.json', 'r') as f:
-            initiatives_data = json.load(f)
-        
-        for i, initiative in enumerate(initiatives_data):
-            # Highlight the first item
-            style = 'style="font-weight: bold; color: #ff7700;"' if i == 0 else ''
-            
-            sidebar_initiatives_html += f'''
+
+def read_text(path):
+    return path.read_text(encoding="utf-8")
+
+
+def write_text(path, content):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
+def load_json(path):
+    with path.open("r", encoding="utf-8") as file_obj:
+        return json.load(file_obj)
+
+
+def load_yaml(path):
+    with path.open("r", encoding="utf-8") as file_obj:
+        return yaml.safe_load(file_obj)
+
+
+def render_placeholders(template, context):
+    def replace(match):
+        key = match.group(1)
+        return str(context.get(key, match.group(0)))
+
+    return PLACEHOLDER_PATTERN.sub(replace, template)
+
+
+def build_sidebar_initiatives_html(initiatives_data):
+    items = []
+
+    for index, initiative in enumerate(initiatives_data):
+        style = 'style="font-weight: bold; color: #ff7700;"' if index == 0 else ""
+        items.append(
+            f"""
             <li>
                 <a class="wp-block-latest-posts__post-title" href="{{{{ relative_root }}}}/initiatives/{initiative['slug']}.html" {style}>
                     {initiative['title']}
                 </a>
             </li>
-            '''
-    
-    # Process each page
-    for content_file, config in pages.items():
-        output_path = os.path.join(output_dir, config['output'])
-        active_class = config['class']
-        relative_root = '.'
-        
-        content = ""
-        
-        # Special handling for people page if data exists
-        if content_file == 'people.html' and os.path.exists('data/people.json'):
-            print("Generating people page from data/people.json...")
-            with open('data/people.json', 'r') as f:
-                people_data = json.load(f)
-            
-            with open('templates/person_block.html', 'r') as f:
-                person_template = f.read()
-                
-            with open('templates/people_page.html', 'r') as f:
-                people_page_template = f.read()
-            
-            people_html = ""
-            for person in people_data:
-                # Simple string replacement
-                person_block = person_template
-                for key, value in person.items():
-                    person_block = person_block.replace(f'{{{key}}}', str(value))
-                
-                # Handle website block
-                if 'website' in person and person['website']:
-                    website_html = f'''
+            """
+        )
+
+    return "".join(items)
+
+
+def canonical_url(base_url, output_path):
+    if output_path == "index.htm":
+        return f"{base_url}/"
+    return f"{base_url}/{output_path}"
+
+
+def build_page_metadata(site_metadata, page_key, output_path):
+    page_data = dict(site_metadata["pages"][page_key])
+    page_data["url"] = canonical_url(site_metadata["site"]["base_url"], output_path)
+    return page_data
+
+
+def build_initiative_metadata(site_metadata, initiative):
+    initiative_config = site_metadata["initiative_page"]
+    description = initiative.get("description")
+
+    if description:
+        page_description = initiative_config["description_template"].format(
+            title=initiative["title"],
+            description=description,
+        )
+    else:
+        page_description = initiative_config["fallback_description"].format(
+            title=initiative["title"],
+        )
+
+    return {
+        "title": initiative_config["title_template"].format(title=initiative["title"]),
+        "description": page_description,
+        "keywords": initiative_config["keywords_template"].format(title=initiative["title"]),
+        "url": f"{site_metadata['site']['base_url']}/initiatives/{initiative['slug']}.html",
+    }
+
+
+def build_layout_context(site_metadata, page_metadata, relative_root, active_class):
+    site = site_metadata["site"]
+    open_graph = site["open_graph"]
+    twitter = site["twitter"]
+
+    context = {
+        "page_title": page_metadata["title"],
+        "page_description": page_metadata["description"],
+        "page_keywords": page_metadata["keywords"],
+        "canonical_url": page_metadata["url"],
+        "meta_author": site["author"],
+        "meta_robots": site["robots"],
+        "og_type": open_graph["type"],
+        "og_image": open_graph["image"],
+        "og_image_width": open_graph["image_width"],
+        "og_image_height": open_graph["image_height"],
+        "og_site_name": site["name"],
+        "og_locale": site["locale"],
+        "twitter_card": twitter["card"],
+        "twitter_image": twitter["image"],
+        "twitter_image_alt": twitter["image_alt"],
+        "structured_data": json.dumps(
+            site["structured_data"],
+            ensure_ascii=False,
+            indent=6,
+        ),
+        "site_name": site["name"],
+        "site_tagline": site["tagline"],
+        "home_link_title": site["home_link_title"],
+        "footer_tagline": site["footer_tagline"],
+        "relative_root": relative_root,
+    }
+
+    for nav_class in NAV_CLASSES:
+        context[nav_class] = "current-menu-item" if nav_class == active_class else ""
+
+    return context
+
+
+def render_layout(
+    layout,
+    content,
+    sidebar_initiatives_html,
+    site_metadata,
+    page_metadata,
+    relative_root,
+    active_class,
+):
+    page_html = layout.replace("<!-- CONTENT -->", content)
+    page_html = page_html.replace(
+        "<!-- SIDEBAR_INITIATIVES -->",
+        sidebar_initiatives_html,
+    )
+    return render_placeholders(
+        page_html,
+        build_layout_context(site_metadata, page_metadata, relative_root, active_class),
+    )
+
+
+def build_people_page():
+    people_data = load_json(ROOT / "data" / "people.json")
+    person_template = read_text(ROOT / "templates" / "person_block.html")
+    people_page_template = read_text(ROOT / "templates" / "people_page.html")
+
+    people_html = ""
+
+    for person in people_data:
+        person_block = person_template
+
+        for key, value in person.items():
+            person_block = person_block.replace(f"{{{key}}}", str(value))
+
+        if person.get("website"):
+            website_html = f"""
                         <li class="wp-social-link wp-social-link-url wp-block-social-link">
                           <a href="{person['website']}" class="wp-block-social-link-anchor">
                             <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -162,68 +176,130 @@ def build_site():
                             </svg>
                             <span class="wp-block-social-link-label screen-reader-text">Website</span>
                           </a>
-                        </li>'''
-                    person_block = person_block.replace('{website_block}', website_html)
-                else:
-                    person_block = person_block.replace('{website_block}', '')
-                
-                people_html += person_block
-            
-            content = people_page_template.replace('<!-- PEOPLE_LIST -->', people_html)
-
-        # Special handling for initiatives page
-        elif content_file == 'initiatives.html':
-            # We already loaded initiatives_data above
-            
-            with open('templates/initiative_list_item.html', 'r') as f:
-                initiative_item_template = f.read()
-                
-            with open('templates/initiatives_list.html', 'r') as f:
-                initiatives_list_template = f.read()
-            
-            initiatives_html = ""
-            for initiative in initiatives_data:
-                item_block = initiative_item_template
-                for key, value in initiative.items():
-                    if key != 'content_file':
-                        item_block = item_block.replace(f'{{{key}}}', str(value))
-                initiatives_html += item_block
-            
-            content = initiatives_list_template.replace('<!-- INITIATIVES_LIST -->', initiatives_html)
-            
-            # Also generate individual initiative pages
-            generate_initiative_pages(initiatives_data, layout, output_dir, sidebar_initiatives_html)
-
+                        </li>"""
+            person_block = person_block.replace("{website_block}", website_html)
         else:
-            content_path = os.path.join(content_dir, content_file)
-            if not os.path.exists(content_path):
-                print(f"Warning: Content file {content_path} not found. Skipping.")
-                continue
-                
-            with open(content_path, 'r') as f:
-                content = f.read()
-        
-        # Replace placeholders
-        page_html = layout.replace('<!-- CONTENT -->', content)
-        page_html = page_html.replace('<!-- SIDEBAR_INITIATIVES -->', sidebar_initiatives_html)
-        page_html = page_html.replace('{{ relative_root }}', relative_root)
-        
-        # Replace SEO metadata
-        metadata = page_metadata.get(content_file, page_metadata['index.html'])
-        page_html = page_html.replace('{{ page_title }}', metadata['title'])
-        page_html = page_html.replace('{{ page_description }}', metadata['description'])
-        page_html = page_html.replace('{{ page_keywords }}', metadata['keywords'])
-        page_html = page_html.replace('{{ canonical_url }}', metadata['url'])
-        
-        # Reset all classes
-        for cls in ['class_home', 'class_about', 'class_projects', 'class_people', 'class_initiatives']:
-            page_html = page_html.replace(f'{{{{ {cls} }}}}', 'current-menu-item' if cls == active_class else '')
-            
-        # Write output
-        with open(output_path, 'w') as f:
-            f.write(page_html)
-        
+            person_block = person_block.replace("{website_block}", "")
+
+        people_html += person_block
+
+    return people_page_template.replace("<!-- PEOPLE_LIST -->", people_html)
+
+
+def build_initiatives_page(initiatives_data):
+    initiative_item_template = read_text(ROOT / "templates" / "initiative_list_item.html")
+    initiatives_list_template = read_text(ROOT / "templates" / "initiatives_list.html")
+
+    initiatives_html = ""
+
+    for initiative in initiatives_data:
+        item_block = initiative_item_template
+        for key, value in initiative.items():
+            if key != "content_file":
+                item_block = item_block.replace(f"{{{key}}}", str(value))
+        initiatives_html += item_block
+
+    return initiatives_list_template.replace("<!-- INITIATIVES_LIST -->", initiatives_html)
+
+
+def generate_initiative_pages(
+    initiatives_data,
+    layout,
+    output_dir,
+    sidebar_initiatives_html,
+    site_metadata,
+):
+    page_template = read_text(ROOT / "templates" / "initiative_page.html")
+    initiatives_dir = output_dir / "initiatives"
+
+    for initiative in initiatives_data:
+        slug = initiative["slug"]
+        output_path = initiatives_dir / f"{slug}.html"
+        content_path = ROOT / initiative.get("content_file", "")
+
+        if initiative.get("content_file") and content_path.exists():
+            initiative_content = read_text(content_path)
+        else:
+            initiative_content = initiative.get("content", "")
+
+        page_content = page_template.replace("{title}", initiative["title"])
+        page_content = page_content.replace("{content}", initiative_content)
+
+        page_html = render_layout(
+            layout,
+            page_content,
+            sidebar_initiatives_html,
+            site_metadata,
+            build_initiative_metadata(site_metadata, initiative),
+            "..",
+            "class_initiatives",
+        )
+
+        write_text(output_path, page_html)
         print(f"Generated {output_path}")
 
+
+def build_site(output_dir):
+    site_metadata = load_yaml(ROOT / "data" / "site_metadata.yaml")
+    layout = read_text(ROOT / "templates" / "layout.html")
+    content_dir = ROOT / "content"
+
+    pages = {
+        "index.html": {"output": "index.htm", "class": "class_home"},
+        "about.html": {"output": "about.htm", "class": "class_about"},
+        "projects.htm": {"output": "projects.htm", "class": "class_projects"},
+        "people.html": {"output": "people.htm", "class": "class_people"},
+        "initiatives.html": {"output": "Initiatives.htm", "class": "class_initiatives"},
+    }
+
+    initiatives_path = ROOT / "data" / "initiatives.json"
+    initiatives_data = load_json(initiatives_path) if initiatives_path.exists() else []
+    sidebar_initiatives_html = build_sidebar_initiatives_html(initiatives_data)
+
+    for content_file, config in pages.items():
+        active_class = config["class"]
+        output_path = output_dir / config["output"]
+        page_metadata = build_page_metadata(site_metadata, content_file, config["output"])
+
+        if content_file == "people.html" and (ROOT / "data" / "people.json").exists():
+            print("Generating people page from data/people.json...")
+            content = build_people_page()
+        elif content_file == "initiatives.html":
+            content = build_initiatives_page(initiatives_data)
+            generate_initiative_pages(
+                initiatives_data,
+                layout,
+                output_dir,
+                sidebar_initiatives_html,
+                site_metadata,
+            )
+        else:
+            content_path = content_dir / content_file
+            if not content_path.exists():
+                print(f"Warning: Content file {content_path} not found. Skipping.")
+                continue
+            content = read_text(content_path)
+
+        page_html = render_layout(
+            layout,
+            content,
+            sidebar_initiatives_html,
+            site_metadata,
+            page_metadata,
+            ".",
+            active_class,
+        )
+
+        write_text(output_path, page_html)
+        print(f"Generated {output_path}")
+
+
 if __name__ == "__main__":
-    build_site()
+    parser = argparse.ArgumentParser(description="Build the static site.")
+    parser.add_argument(
+        "--output",
+        default="dist",
+        help="Directory where the built site will be written.",
+    )
+    args = parser.parse_args()
+    build_site((ROOT / args.output).resolve())

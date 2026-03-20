@@ -9,8 +9,8 @@
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ page_description }}" />
     <meta name="keywords" content="{{ page_keywords }}" />
-    <meta name="author" content="OH-SCIPE - NSF-funded AI and ML Research Initiative" />
-    <meta name="robots" content="index, follow" />
+    <meta name="author" content="{{ meta_author }}" />
+    <meta name="robots" content="{{ meta_robots }}" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ canonical_url }}" />
@@ -18,65 +18,25 @@
     <!-- Open Graph Meta Tags for Social Media -->
     <meta property="og:title" content="{{ page_title }}" />
     <meta property="og:description" content="{{ page_description }}" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="{{ og_type }}" />
     <meta property="og:url" content="{{ canonical_url }}" />
-    <meta property="og:image" content="https://oh-scipe.github.io/assets/images/project1.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="OH-SCIPE" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:image:width" content="{{ og_image_width }}" />
+    <meta property="og:image:height" content="{{ og_image_height }}" />
+    <meta property="og:site_name" content="{{ og_site_name }}" />
+    <meta property="og:locale" content="{{ og_locale }}" />
     
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="{{ twitter_card }}" />
     <meta name="twitter:title" content="{{ page_title }}" />
     <meta name="twitter:description" content="{{ page_description }}" />
-    <meta name="twitter:image" content="https://oh-scipe.github.io/assets/images/project1.png" />
-    <meta name="twitter:image:alt" content="OH-SCIPE - AI and ML Research Initiative" />
+    <meta name="twitter:image" content="{{ twitter_image }}" />
+    <meta name="twitter:image:alt" content="{{ twitter_image_alt }}" />
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ResearchOrganization",
-      "name": "OH-SCIPE",
-      "alternateName": "Ohio Science and Engineering through Advanced AI",
-      "description": "NSF-funded initiative revolutionizing research with AI and ML integration, empowering science and engineering through advanced artificial intelligence",
-      "url": "https://oh-scipe.github.io",
-      "logo": "https://oh-scipe.github.io/assets/images/project1.png",
-      "sameAs": [
-        "https://www.nsf.gov"
-      ],
-      "funder": {
-        "@type": "Organization",
-        "name": "National Science Foundation",
-        "url": "https://www.nsf.gov"
-      },
-      "member": [
-        {
-          "@type": "Organization",
-          "name": "Case Western Reserve University",
-          "url": "https://case.edu/"
-        },
-        {
-          "@type": "Organization",
-          "name": "Ohio Supercomputer Center",
-          "url": "https://www.osc.edu/"
-        },
-        {
-          "@type": "Organization",
-          "name": "University of Cincinnati",
-          "url": "https://www.uc.edu/"
-        }
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Research Inquiries",
-        "email": "vipin@case.edu"
-      }
-    }
+{{ structured_data }}
     </script>
-
-    <!--[if lt IE 10]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script></script><![endif]-->
 
     <link
       rel="shortcut icon"
@@ -84,22 +44,6 @@
     />
     <link rel="icon" type="image/png" sizes="300x300" href="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png" />
 
-    <link rel="dns-prefetch" href="https://code.jquery.com/" />
-
-    <style id="wp-emoji-styles-inline-css" type="text/css">
-      img.wp-smiley,
-      img.emoji {
-        display: inline !important;
-        border: none !important;
-        box-shadow: none !important;
-        height: 1em !important;
-        width: 1em !important;
-        margin: 0 0.07em !important;
-        vertical-align: -0.1em !important;
-        background: none !important;
-        padding: 0 !important;
-      }
-    </style>
     <link
       rel="stylesheet"
       id="wp-block-library-css"
@@ -132,10 +76,6 @@
       type="text/css"
       media="all"
     />
-
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://code.jquery.com" crossorigin />
-    
   </head>
 
   <body class="home page-template-default page page-id-4363 webapp">
@@ -158,12 +98,12 @@
           <h2 class="site-title">
             <a
               href="https://oh-scipe.github.io/"
-              title="Cross-Institutional Research Engagement Network (CIREN)"
+              title="{{ home_link_title }}"
               rel="home"
-            >OH-SCIPE
+            >{{ site_name }}
             </a>
             <p style="font-size: 14px; color: #666; font-weight: normal; margin-top: 5px;">
-              Empowering Science and Engineering through Advanced AI
+              {{ site_tagline }}
             </p>
           </h2>
           
@@ -186,7 +126,6 @@
       <div id="page" class="hfeed site row-offcanvas">
         <div id="main" class="site-main">
           <div id="sidebar">
-            <!-- #Find Box -->
             <div class="sidebar-offcanvas inactive">
               <nav role="navigation" id="mainnav">
                 <button type="button" class="btn btn-findpage btn-close">
@@ -203,8 +142,6 @@
                   </svg>
                   <span class="close">CLOSE</span>
                 </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-
                 <div id="bellows">
                   <div class="menu-main-container">
                     <ul id="menu-main" class="menu">
@@ -246,7 +183,6 @@
                   </div>
                 </div>
               </nav>
-              <!-- #site-navigation -->
             </div>
           </div>
 
@@ -282,7 +218,6 @@
                   class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"
                 >
 
-                <!-- Start Initiatives -->
                 <div class="wp-block-group__inner-container">
                   <h2 class="wp-block-heading">Initiatives</h2>
 
@@ -291,8 +226,6 @@
                   </ul>
                   
                 </div>
-
-                <!-- End Initiatives -->
 
                   <div class="wp-block-group__inner-container">
                     <h2 class="wp-block-heading">Partners</h2>
@@ -326,15 +259,10 @@
                 </div>
               </aside>
             </div>
-            <!-- .widget-area -->
-
             <br class="clear" />
           </div>
-          <!-- #tertiary -->
         </div>
-        <!-- #primary -->
       </div>
-      <!-- .main-content -->
     </div>
 
     <footer id="colophon" class="site-footer" role="contentinfo">
@@ -411,13 +339,12 @@
             <br />
 
             <p class="has-text-align-center">
-              <strong> OH-SCIPE </strong>
+              <strong> {{ site_name }} </strong>
             </p>
 
             <p class="has-text-align-center">
               <strong
-                >Revolutionizing Research with AI and ML Integration Empowering
-                Science and Engineering through Advanced AI
+                >{{ footer_tagline }}
               </strong>
             </p>
           </div>
@@ -435,7 +362,7 @@
                 <a
                   href="https://oh-scipe.github.io/"
                   class="logo icon-bobi-main"
-                  >Name</a
+                  >{{ site_name }}</a
                 >
               </h2>
             </div>
@@ -452,75 +379,10 @@
       </div>
     </footer>
 
-    <style id="core-block-supports-inline-css" type="text/css">
-      .wp-container-core-columns-layout-1.wp-container-core-columns-layout-1 {
-        flex-wrap: nowrap;
-      }
-    </style>
     <script
       type="text/javascript"
-      src="{{ relative_root }}/assets/js/jquery-1.11.2.min.js"
-      id="jquery-js"
+      src="{{ relative_root }}/assets/js/site.js"
+      id="site-js"
     ></script>
-    <script type="text/javascript" id="utthehill-utk-js-extra">
-      /* <![CDATA[ */
-      var url_object = {
-        templateDirectory:
-          "https:\/\/ciren.oh-scipe.github.io\/wp-content\/themes\/ut-thehill",
-        siteId: "437",
-        nivo_anim_speed: "500",
-        nivo_pause_time: "3000",
-      };
-      /* ]]> */
-    </script>
-    <script
-      type="text/javascript"
-      src="{{ relative_root }}/assets/js/v2019.js"
-      id="utthehill-utk-js"
-    ></script>
-
-    <script>
-      var superSearch = new Bloodhound({
-        //	datumTokenizer: Bloodhound.tokenizers.obj.whitespace('post_title'),
-        datumTokenizer: Bloodhound.tokenizers.whitespace,
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-          url: "https://oh-scipe.github.io/wp-json/ja/v2/search?term=%QUERY",
-          wildcard: "%QUERY",
-        },
-      });
-
-      $("#remote .typeahead")
-        .typeahead(
-          {
-            hint: false,
-            highlight: true,
-            minLength: 2,
-            async: true,
-            autoselect: true,
-          },
-          {
-            name: "search-content",
-            //	limit: 5,
-            display: "post_title",
-            source: superSearch,
-            templates: {
-              header: '<h3 class="typeaheadTitle">Suggestions</h3>',
-              notFound:
-                '<h3 class="typeaheadTitle">No results on this site</h3><input type="submit" name="btnF" class="btn-supersearch searchListItem tt-suggestion tt-selectable"	value="Search the site">',
-              pending: '<h3 class="typeaheadTitle">Searching...</h3>',
-              footer:
-                '<input type="submit" name="btnF" class="btn-supersearch searchListItem tt-suggestion tt-selectable"	value="See all results">',
-              suggestion: Handlebars.compile(
-                '<div class="searchListItem"><a href="https://oh-scipe.github.io/?p={{ID}}" class="searchLink" aria-label="{{post_title}}"><span class="suggestion-head">{{post_title}}</span></a></div>'
-              ),
-            },
-          }
-        )
-        .on("typeahead:selected", function (event, selection) {
-          url = "https://oh-scipe.github.io/			" + "?p=" + selection.ID;
-          window.location.href = url;
-        });
-    </script>
   </body>
 </html>

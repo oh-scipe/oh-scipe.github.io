@@ -2,14 +2,13 @@
   "name": "oh-scipe.github.io",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node scripts/prepareDist.js && node scripts/copyOptimizeImages.js && python3 build.py --output dist",
+    "clean": "node scripts/prepareDist.js --clean-only",
+    "preview": "python3 -m http.server --directory dist 8008",
+    "verify": "python3 verify_seo.py dist"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "sharp": "^0.34.5"
   }

@@ -3,11 +3,36 @@ import path from "node:path";
 import sharp from "sharp";
 import { cpus } from "node:os";
 
-const imgSourceDir = path.join(process.cwd(), "src", "images");
-const imgTargetDir = path.join(process.cwd(), "assets", "images");
+const args = parseArgs(process.argv.slice(2));
+const imgSourceDir = path.resolve(
+  process.cwd(),
+  args.source ?? path.join("src", "images"),
+);
+const imgTargetDir = path.resolve(
+  process.cwd(),
+  args.target ?? path.join("dist", "assets", "images"),
+);
 
 // Limit concurrent operations to number of CPU cores
 const CONCURRENCY_LIMIT = cpus().length;
+
+function parseArgs(argv) {
+  const parsed = {};
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+
+    if (arg === "--source" || arg === "--target") {
+      const value = argv[index + 1];
+      if (value) {
+        parsed[arg.slice(2)] = value;
+        index += 1;
+      }
+    }
+  }
+
+  return parsed;
+}
 
 async function copyAndOptimizeImages() {
   const startTime = Date.now();
