@@ -6,9 +6,15 @@
     "content_file": "content/initiatives/llm-working-2026.html"
   },
   {
+    "title": "Summer 2026 Internship",
+    "slug": "summer-2026-internship",
+    "description": "Current AIRE summer internship opportunity for 2026.",
+    "content_file": "content/initiatives/summer-2026-internship.html"
+  },
+  {
     "title": "Summer 2025 Internship",
     "slug": "summer-2025-internship",
-    "description": "Upcoming summer internship program for 2025.",
+    "description": "Archived OH-SCIPE summer internship entry for 2025.",
     "content_file": "content/initiatives/summer-2025-internship.html"
   },
   {

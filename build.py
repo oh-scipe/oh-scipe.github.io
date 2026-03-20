@@ -47,7 +47,7 @@ def build_sidebar_initiatives_html(initiatives_data):
     items = []
 
     for index, initiative in enumerate(initiatives_data):
-        style = 'style="font-weight: bold; color: #ff7700;"' if index == 0 else ""
+        style = 'style="font-weight: bold; color: #a34712;"' if index == 0 else ""
         items.append(
             f"""
             <li>

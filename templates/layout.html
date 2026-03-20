@@ -32,6 +32,7 @@
     <meta name="twitter:description" content="{{ page_description }}" />
     <meta name="twitter:image" content="{{ twitter_image }}" />
     <meta name="twitter:image:alt" content="{{ twitter_image_alt }}" />
+    <meta name="theme-color" content="#163853" />
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -43,6 +44,12 @@
       href="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png"
     />
     <link rel="icon" type="image/png" sizes="300x300" href="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    />
 
     <link
       rel="stylesheet"
@@ -72,7 +79,7 @@
     <link
       rel="stylesheet"
       id="custom-style-css"
-      href="{{ relative_root }}/assets/css/v2019.css"
+      href="{{ relative_root }}/assets/css/site-theme.css"
       type="text/css"
       media="all"
     />
@@ -95,17 +102,16 @@
 
       <header id="main-navigation" role="banner">
         <div class="container-columns">
-          <h2 class="site-title">
-            <a
-              href="https://oh-scipe.github.io/"
-              title="{{ home_link_title }}"
-              rel="home"
-            >{{ site_name }}
-            </a>
-            <p style="font-size: 14px; color: #666; font-weight: normal; margin-top: 5px;">
-              {{ site_tagline }}
-            </p>
-          </h2>
+          <div class="site-branding">
+            <h2 class="site-title">
+              <a
+                href="https://oh-scipe.github.io/"
+                title="{{ home_link_title }}"
+                rel="home"
+              >{{ site_name }}</a>
+            </h2>
+            <p class="site-tagline">{{ site_tagline }}</p>
+          </div>
           
           <button type="button" class="btn btn-findpage">
             <span class="sr-only">Toggle navigation</span>
@@ -128,8 +134,13 @@
           <div id="sidebar">
             <div class="sidebar-offcanvas inactive">
               <nav role="navigation" id="mainnav">
-                <button type="button" class="btn btn-findpage btn-close">
-                  <span class="sr-only">Toggle navigation</span>
+                <button
+                  type="button"
+                  class="btn btn-findpage btn-close"
+                  aria-label="Close navigation"
+                  title="Close navigation"
+                >
+                  <span class="sr-only">Close navigation</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -140,7 +151,6 @@
                       d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"
                     ></path>
                   </svg>
-                  <span class="close">CLOSE</span>
                 </button>
                 <div id="bellows">
                   <div class="menu-main-container">
@@ -268,106 +278,82 @@
     <footer id="colophon" class="site-footer" role="contentinfo">
       <div class="container">
         <section id="expandedfooter" class="expanded-one">
-          <div
-            class="wp-block-image"
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-              justify-content: center;
-            "
-          >
+          <div class="footer-top">
+            <div class="footer-intro">
+              <p class="footer-eyebrow">NSF-supported AI collaboration across Ohio research institutions</p>
+              <h2 class="footer-title">{{ site_name }}</h2>
+              <p class="footer-description">{{ footer_tagline }}</p>
+              <nav class="footer-nav" aria-label="Footer navigation">
+                <a href="{{ relative_root }}/index.htm">Home</a>
+                <a href="{{ relative_root }}/about.htm">About</a>
+                <a href="{{ relative_root }}/projects.htm">Projects</a>
+                <a href="{{ relative_root }}/people.htm">People</a>
+                <a href="{{ relative_root }}/Initiatives.htm">Initiatives</a>
+              </nav>
+            </div>
 
-          
-            <figure
-              class="aligncenter size-large is-resized"
-              style="display: flex; align-items: center"
-            >
-              <img
-                loading="lazy"
-                decoding="async"
-                src="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png"
-                alt="National Science Foundation Official Logo"
-                class="wp-image-4390"
-                width="120"
-                height="120"
-                srcset=""
-                sizes="(max-width: 120px) 100vw, 120px"
-              />
-              <img
-                loading="lazy"
-                decoding="async"
-                src="{{ relative_root }}/assets/images/logo/osu_logo.png"
-                alt="Ohio Supercomputer Center Logo"
-                class="wp-image-4390"
-                width="120"
-                height="120"
-                srcset=""
-                sizes="(max-width: 120px) 100vw, 120px"
-              />
-              <img
-                loading="lazy"
-                decoding="async"
-                src="{{ relative_root }}/assets/images/logo/cwru_logo.png"
-                alt="Case Western Reserve University Logo"
-                class="wp-image-4390"
-                width="120"
-                height="120"
-                srcset=""
-                sizes="(max-width: 120px) 100vw, 120px"
-              />
-              <img
-                loading="lazy"
-                decoding="async"
-                src="{{ relative_root }}/assets/images/logo/uoc_logo.png"
-                alt="University of Cincinnati Logo"
-                class="wp-image-4390"
-                width="120"
-                height="120"
-                srcset=""
-                sizes="(max-width: 120px) 100vw, 120px"
-              />
-            </figure>
-
-
-
-          </div>
-
-          <div
-            class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow"
-            style="flex-basis: 85%"
-          >
-            <br />
-
-            <p class="has-text-align-center">
-              <strong> {{ site_name }} </strong>
-            </p>
-
-            <p class="has-text-align-center">
-              <strong
-                >{{ footer_tagline }}
-              </strong>
-            </p>
+            <div class="footer-logos" aria-label="Partner organizations">
+              <a class="footer-logo-card footer-logo-card--nsf" href="https://www.nsf.gov/" target="_blank" rel="noopener">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="{{ relative_root }}/assets/images/logo/NSF_Official_logo_Low_Res_150ppi-300x300.png"
+                  alt="National Science Foundation Official Logo"
+                  width="90"
+                  height="90"
+                />
+                <span>National Science Foundation</span>
+              </a>
+              <a class="footer-logo-card" href="https://www.osc.edu/" target="_blank" rel="noopener">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="{{ relative_root }}/assets/images/logo/osu_logo.png"
+                  alt="Ohio Supercomputer Center Logo"
+                  width="160"
+                  height="72"
+                />
+                <span>Ohio Supercomputer Center</span>
+              </a>
+              <a class="footer-logo-card footer-logo-card--cwru" href="https://case.edu/" target="_blank" rel="noopener">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="{{ relative_root }}/assets/images/logo/CWRU_Acronym-logo-brand.webp"
+                  alt="Case Western Reserve University Logo"
+                  width="160"
+                  height="72"
+                />
+                <span>Case Western Reserve University</span>
+              </a>
+              <a class="footer-logo-card" href="https://www.uc.edu/" target="_blank" rel="noopener">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="{{ relative_root }}/assets/images/logo/uoc_logo.png"
+                  alt="University of Cincinnati Logo"
+                  width="160"
+                  height="72"
+                />
+                <span>University of Cincinnati</span>
+              </a>
+            </div>
           </div>
         </section>
-
-        <div id="siteinfo">
-        </div>
       </div>
 
       <div id="campus-footer">
         <div class="container">
-          <div id="utk">
-            <div id="bobi">
-              <h2>
-                <a
-                  href="https://oh-scipe.github.io/"
-                  class="logo icon-bobi-main"
-                  >{{ site_name }}</a
-                >
-              </h2>
+          <div class="footer-bottom">
+            <div class="footer-bottom-brand">
+              <a
+                href="https://oh-scipe.github.io/"
+                class="footer-site-link"
+              >{{ site_name }}</a>
+              <p class="footer-note">{{ site_tagline }}</p>
             </div>
 
-            <div id="address">
+            <div class="footer-address">
               <p>
                 <strong>Case Western Reserve University</strong><br />
                 10900 Euclid Avenue<br />
